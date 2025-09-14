@@ -5,7 +5,7 @@ socket.on("connect", function () {
   console.log("Connected...!", socket.connected);
 });
 
-var videoelement = document.getElementById("videoelement");
+var videoelement = document.getElementById("webcamVideo");
 var localStreamConstraints = {
     audio: true,
     video: { width: 1920, height: 1080 },
@@ -38,8 +38,10 @@ function gotStream(stream) {
 
 function capture_frame()
 {
-    const img = document.getElementById('video');
-    socket.emit("frame", img);
+    var type = "image/png";
+    var data = document.getElementById("canvasOutput").toDataURL(type);
+    //data = data.replace('data:' + type + ';base64,', '');
+    socket.emit("frame", data);
 }
 
 

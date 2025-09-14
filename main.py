@@ -63,8 +63,6 @@ def capture_frames():
 
 @socketio.on("frame")
 def receive_image(image):
-    print("yea frame")
-
     # Decode the base64-encoded image data
     image = base64_to_image(image)
 
