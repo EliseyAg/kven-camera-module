@@ -35,10 +35,13 @@ function gotStream(stream) {
     mediarecorder.ondataavailable = handleDataAvailable;
 }
 
-socket.on('frame', (jpg_as_text) => {
+
+function capture_frame()
+{
     const img = document.getElementById('video');
-    videoelement.src = 'data:image/jpeg;base64,' + jpg_as_text;
-});
+    socket.emit("frame", img);
+}
+
 
 var recbtn=document.getElementById("recbutton")
 if(recbtn){
@@ -74,3 +77,5 @@ function download() {
     a.click();
     window.URL.revokeObjectURL(url);
 }
+
+let timerId = setInterval(capture_frame, 35);

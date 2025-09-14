@@ -33,6 +33,7 @@ def test_connect():
     emit("my response", {"data": "Connected"})
 
 
+'''
 def capture_frames():
     """Capture frames from the default camera and emit them to clients."""
     cap = cv2.VideoCapture(0)
@@ -52,15 +53,18 @@ def capture_frames():
         jpg_as_text = base64.b64encode(buffer).decode('utf-8')
 
         # Emit the encoded frame to all connected clients
-        socketio.emit('frame', jpg_as_text)
+        socketio.emit("frame", jpg_as_text)
 
         eventlet.sleep(0.1)
 
     cap.release()
+'''
 
 
 @socketio.on("frame")
 def receive_image(image):
+    print("yea frame")
+
     # Decode the base64-encoded image data
     image = base64_to_image(image)
 
