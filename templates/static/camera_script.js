@@ -1,8 +1,13 @@
 var socket = io.connect(
   window.location.protocol + "//" + document.domain + ":" + location.port
 );
+
 socket.on("connect", function () {
   console.log("Connected...!", socket.connected);
+});
+
+socket.on("processed_image", function (processed_img_data) {
+  videoelement.data.set(processed_img_data)
 });
 
 var videoelement = document.getElementById("webcamVideo");
@@ -38,7 +43,7 @@ function gotStream(stream) {
 
 function capture_frame()
 {
-    var type = "image/png";
+    var type = "image/jpeg";
     var data = document.getElementById("canvasOutput").toDataURL(type);
     //data = data.replace('data:' + type + ';base64,', '');
     socket.emit("frame", data);

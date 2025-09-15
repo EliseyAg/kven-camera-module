@@ -1,5 +1,6 @@
 from flask import Flask, render_template, send_from_directory
 from flask_socketio import SocketIO, emit
+from engineio.payload import Payload
 
 import cv2
 
@@ -9,6 +10,8 @@ import numpy as np
 import base64
 import os
 
+
+Payload.max_decode_packets = 1024
 
 app = Flask(__name__, static_folder="templates/static")
 app.config["SECRET_KEY"] = "secret!"
@@ -40,7 +43,7 @@ def receive_image(image):
 
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
-    frame_resized = cv2.resize(gray, (640, 360))
+    frame_resized = cv2.resize(gray, (360, 360))
 
     encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 90]
 
