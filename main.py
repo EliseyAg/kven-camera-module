@@ -41,21 +41,6 @@ def receive_image(image):
     # Decode the base64-encoded image data
     image = base64_to_image(image)
 
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-
-    frame_resized = cv2.resize(gray, (360, 360))
-
-    encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 90]
-
-    result, frame_encoded = cv2.imencode(".jpg", frame_resized, encode_param)
-
-    processed_img_data = base64.b64encode(frame_encoded).decode()
-
-    b64_src = "data:image/jpg;base64,"
-    processed_img_data = b64_src + processed_img_data
-
-    emit("processed_image", processed_img_data)
-
 
 @app.route("/")
 def index():

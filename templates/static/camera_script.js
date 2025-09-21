@@ -6,10 +6,6 @@ socket.on("connect", function () {
   console.log("Connected...!", socket.connected);
 });
 
-socket.on("processed_image", function (processed_img_data) {
-  videoelement.data.set(processed_img_data)
-});
-
 var videoelement = document.getElementById("webcamVideo");
 var localStreamConstraints = {
     audio: true,
@@ -26,7 +22,7 @@ if (videoelement) {
     .getUserMedia(localStreamConstraints)
     .then(gotStream)
     .catch(function (e) {
-        if (confirm("An error with camera occured:(" + e.name + ") Do you want to reload?")) {
+        if (confirm("An error with camera occured:(" + e.name + ") Do y ou want to reload?")) {
             location.reload();
         }
     });
