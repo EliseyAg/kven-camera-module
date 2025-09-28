@@ -19,6 +19,6 @@ def index():
 
 if __name__ == "__main__":
     cam = Camera()
-    socketio.on_event('connect', cam.test_connect, namespace='/test')
-    socketio.on_event('frame', cam.receive_image, namespace='/test')
+    socketio.on_event('connect', cam.test_connect)
+    socketio.on_event('frame', cam.receive_image)
     socketio.run(app, host="0.0.0.0", port=5000, allow_unsafe_werkzeug=True)

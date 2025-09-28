@@ -22,7 +22,7 @@ class Camera:
     def __init__(self):
         pass
 
-    def test_connect(self):
+    def test_connect(self, data):
         print("Connected")
         emit("my response", {"data": "Connected"})
 
